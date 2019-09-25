@@ -208,6 +208,11 @@
                     android:text="@string/close_hdmi" />
 
                 <Button
+                    android:id="@+id/hdmi"
+                    style="@style/TestButton"
+                    android:text="@string/hdmi" />
+
+                <Button
                     android:id="@+id/rotate_90"
                     style="@style/TestButton"
                     android:text="@string/rotate_90" />
@@ -328,12 +333,14 @@
 
             <TextView
                 style="@style/TitleText"
-                android:text="@string/storage" />
+                android:text="@string/storage"
+                android:visibility="gone"/>
 
             <com.ys.gttestdemo.FlexBoxLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/externel_sd_path"
@@ -408,6 +415,7 @@
 
                 <Button
                     android:id="@+id/su_order"
+                    android:visibility="gone"
                     style="@style/TestButton"
                     android:text="@string/su_order" />
 
@@ -422,18 +430,15 @@
                     android:text="@string/screen_num" />
 
                 <Button
-                    android:id="@+id/hdmi"
-                    style="@style/TestButton"
-                    android:text="@string/hdmi" />
-
-                <Button
                     android:id="@+id/open_softkeyboard"
                     style="@style/TestButton"
+                    android:visibility="gone"
                     android:text="打开软键盘" />
 
                 <Button
                     android:id="@+id/close_softkeyboard"
                     style="@style/TestButton"
+                    android:visibility="gone"
                     android:text="隐藏软键盘" />
 
                 <Button

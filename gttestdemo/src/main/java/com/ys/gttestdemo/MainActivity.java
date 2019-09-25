@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         manager = MyManager.getInstance(this);
-//        manager.bindAIDLService(this);
+        manager.bindAIDLService(this);
         externalStoragePath = Environment.getExternalStorageDirectory().getPath();
 
         IntentFilter filter = new IntentFilter();
@@ -191,61 +191,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.reboot();
                 break;
             case R.id.nav_bar_state:
-//                ToastUtils.showToast(this,"导航栏是否隐藏："+manager.getNavBarHideState());
+                ToastUtils.showToast(this,"导航栏是否隐藏："+manager.getNavBarHideState());
                 break;
             case R.id.nav_bar_hide_show:
-//                manager.hideNavBar(!manager.getNavBarHideState());
+                manager.hideNavBar(!manager.getNavBarHideState());
                 break;
             case R.id.nav_bar_slide_state:
-//                ToastUtils.showToast(this,"滑出导航栏是否打开："+manager.isSlideShowNavBarOpen());
+                ToastUtils.showToast(this,"滑出导航栏是否打开："+manager.isSlideShowNavBarOpen());
                 break;
             case R.id.nav_bar_slide:
-//                manager.setSlideShowNavBar(!manager.isSlideShowNavBarOpen());
+                manager.setSlideShowNavBar(this,!manager.isSlideShowNavBarOpen());
                 break;
             case R.id.notification_bar_slide_state:
-//                ToastUtils.showToast(this,"滑出通知栏是否打开："+manager.isSlideShowNotificationBarOpen());
+                ToastUtils.showToast(this,"滑出通知栏是否打开："+manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.notification_bar_slide:
-//                manager.setSlideShowNotificationBar(!manager.isSlideShowNotificationBarOpen());
+                manager.setSlideShowNotificationBar(this,!manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.screen_shot:
-//                manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg");
-                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
-//                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
+                boolean isSuccess = manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg");
+                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg" + isSuccess);
                 break;
             case R.id.get_width_height:
-//                int width = manager.getDisplayWidth(this);
-//                int height = manager.getDisplayHeight(this);
-//                ToastUtils.showToast(this,"Width = " + width + " height = " + height);
+                int width = manager.getDisplayWidth(this);
+                int height = manager.getDisplayHeight(this);
+                ToastUtils.showToast(this,"Width = " + width + " height = " + height);
                 break;
             case R.id.change_screen_bright:
                 i =i+10;
                 if (i>100)
                     i=10;
-//                manager.changeScreenLight(i);
+                manager.changeScreenLight(this,i);
                 break;
             case R.id.open_screen_bright:
-//                manager.turnOnBackLight();
+                manager.turnOnBackLight();
                 break;
             case R.id.close_screen_bright:
-//                manager.turnOffBackLight();
+                manager.turnOffBackLight();
                 break;
             case R.id.is_screen_light_on:
-//                ToastUtils.showToast(this,"背光是否打开 = " + manager.isBacklightOn());
+                ToastUtils.showToast(this,"背光是否打开 = " + manager.isBackLightOn());
                 break;
             case R.id.get_brightness:
-//                ToastUtils.showToast(this,"背光亮度 = " + manager.getSystemBrightness());
+                ToastUtils.showToast(this,"背光亮度 = " + manager.getSystemBrightness());
             case R.id.open_hdmi:
-//                manager.turnOnHDMI();
+                manager.turnOnHDMI();
                 break;
             case R.id.close_hdmi:
-//                manager.turnOffHDMI();
+                manager.turnOffHDMI();
+                break;
+            case R.id.hdmi:
+//                ToastUtils.showToast(this,"HDMI =" + manager.isHDMIConnect());
                 break;
             case R.id.rotate_90:
-//                manager.rotateScreen(this,"90");
+                manager.rotateScreen("90");
                 break;
             case R.id.rotate_0:
-//                manager.rotateScreen(this,"0");
+                manager.rotateScreen("0");
                 break;
             case R.id.update_img:
 //                manager.upgradeSystem("/mnt/media_rw/9260-8749/update.zip"); ///mnt/media_rw/10C0-C930/update.zip  Environment.getExternalStorageDirectory().getPath() + "/Download/update.zip"
@@ -253,23 +255,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                ToastUtils.showToast(this,"3399和3328，暂未实现");
                 break;
             case R.id.recovery:
-//                manager.rebootRecovery();
+                manager.rebootRecovery();
                 break;
             case R.id.silent_install:
-//                boolean isScuess = manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/KeyTest.apk");
-//                oast.makeText(this,"静默安装返回值" + isScuess,Toast.LENGTH_LONG).show();// /mnt/sdcard/Download
-//                Log.d("chenhuan","externalStoragePath = " + Environment.getExternalStorageDirectory().getPath() +"/test.apk");
-//                manager.silentInstallApk("/mnt/sdcard/Download/sougoushurufa_831.apk");
+                boolean isScuess = manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/KeyTest.apk");
+                Toast.makeText(this,"静默安装返回值" + isScuess,Toast.LENGTH_LONG).show();// /mnt/sdcard/Download
                 break;
             case R.id.get_eth_status:
-//                ToastUtils.showToast(this,"以太网是否打开=" + manager.getEthStatus());
+                ToastUtils.showToast(this,"以太网是否打开=" + manager.getEthStatus());
                 break;
             case R.id.get_eth_mode:
-//                ToastUtils.showToast(this,"以太网模式为=" +manager.getEthMode());/
+                ToastUtils.showToast(this,"以太网模式为=" +manager.getEthMode());
                 break;
             case R.id.get_eth_mac:
-//                ToastUtils.showToast(this,"Mac地址 = " + manager.getEthMacAddress());
-//                Toast.makeText(getApplicationContext(), "Mac地址 = " + manager.getEthMacAddress(), Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(this,"Mac地址 = " + manager.getEthMacAddress());
                 break;
             case R.id.set_eth_mac:
 //                manager.setEthMacAddress("ee4e592090cf");
@@ -277,35 +276,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"设置以太网mac地址为ee4e592090cf");
                 break;
             case R.id.get_eth_ip:
-//                ToastUtils.showToast(this,"动态IP地址：" + manager.getDhcpIpAddress());
-//                if (DHCP.equals(manager.getEthMode()))
-//                    ToastUtils.showToast(this,"动态IP地址：" + manager.getDhcpIpAddress());
-//                else if (STATICIP.equals(manager.getEthMode()))
-//                    ToastUtils.showToast(this,"静态IP地址：" + manager.getStaticEthIPAddress());
+                if (DHCP.equals(manager.getEthMode()))
+                    ToastUtils.showToast(this,"动态IP地址：" + manager.getDhcpIpAddress());
+                else if (STATICIP.equals(manager.getEthMode()))
+                    ToastUtils.showToast(this,"静态IP地址：" + manager.getStaticEthIPAddress());
                 break;
             case R.id.set_eth_ip:
-//                manager.setStaticEthIPAddress(IPADDR, GATEWAY, MASK, DNS1, DNS2);
+                manager.setStaticEthIPAddress(IPADDR, GATEWAY, MASK, DNS1, DNS2);
                 break;
             case R.id.open_eth:
-//                manager.ethEnabled(true);
+                manager.ethEnabled(true);
                 break;
             case R.id.close_eth:
-//                manager.ethEnabled(false);
+                manager.ethEnabled(false);
                 break;
             case R.id.set_dhcp_eth:
-//                manager.setDhcpIpAddress(this);
+                manager.setDhcpIpAddress();
                 break;
             case R.id.get_mask:
-//                ToastUtils.showToast(this,"以太网子网掩码 = " + manager.getNetMask());
+                ToastUtils.showToast(this,"以太网子网掩码 = " + manager.getNetMask());
                 break;
             case R.id.get_gateway:
-//                ToastUtils.showToast(this,"以太网网关 = " + manager.getGateway());
+                ToastUtils.showToast(this,"以太网网关 = " + manager.getGateway());
                 break;
             case R.id.get_dns1:
-//                ToastUtils.showToast(this,"dns1 = " + manager.getEthDns1());
+                ToastUtils.showToast(this,"dns1 = " + manager.getEthDns1());
                 break;
             case R.id.get_dns2:
-//                ToastUtils.showToast(this,"dns2 = " + manager.getEthDns2());
+                ToastUtils.showToast(this,"dns2 = " + manager.getEthDns2());
                 break;
             case R.id.externel_sd_path:
 //                ToastUtils.showToast(this,"外置SD卡路径 = " + manager.getSDcardPath());
@@ -341,30 +339,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                ToastUtils.showToast(this,"串口0的绝对路径 = " + manager.getUartPath("TTYS0"));
                 break;
             case R.id.set_time:
-//                manager.setTime(2017, 3, 16, 17, 44,55);
+                manager.setTime(2017, 3, 16, 17, 44,55);
                 break;
             case R.id.su_order:
 //                manager.execSuCmd("reboot");
                 break;
             case R.id.net_type:
-//                ToastUtils.showToast(this,"上网类型 =" + manager.getCurrentNetType());
+                ToastUtils.showToast(this,"上网类型 =" + manager.getCurrentNetType());
                 break;
             case R.id.screen_num:
-//                ToastUtils.showToast(this,"屏幕数" + manager.getScreenNumber());
-                break;
-            case R.id.hdmi:
-//                ToastUtils.showToast(this,"HDMI =" + manager.getHdmiinStatus());
+                ToastUtils.showToast(this,"屏幕数" + manager.getScreenNumber());
                 break;
             case R.id.switch_on_time:
-//                manager.switchAutoTime(true);
+                manager.switchAutoTime(true);
                 ToastUtils.showToast(this,"打开自动确定日期和时间" );
                 break;
             case R.id.switch_off_time:
-//                manager.switchAutoTime(false);
+                manager.switchAutoTime(false);
 //                ToastUtils.showToast(this,"关闭自动确定日期和时间" );
                 break;
             case R.id.is_auto_time:
-//                ToastUtils.showToast(this,"是否打开自动更新时间开关 = " + manager.isAutoSyncTime());
+                ToastUtils.showToast(this,"是否打开自动更新时间开关 = " + manager.isAutoSyncTime());
                 break;
             case R.id.open_softkeyboard:
 //                manager.setSoftKeyboardHidden(false);
@@ -373,17 +368,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                manager.setSoftKeyboardHidden(true);
                 break;
             case R.id.set_dormant_interval:
-//                manager.setDormantInterval(this,15000);//2147483647
+                manager.setDormantInterval(this,15000);//2147483647
                 break;
             case R.id.set_default_inputmethod:
-//                ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
-//                        manager.isSetDefaultInputMethodSuccess("com.google.android.inputmethod.pinyin/.PinyinIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
+                ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
+                        manager.isSetDefaultInputMethodSuccess("com.google.android.inputmethod.pinyin/.PinyinIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
                 break;
             case R.id.get_default_inputmethod:
-//                ToastUtils.showToast(this,"当前输入法是:" + manager.getDefaultInputMethod());
+                ToastUtils.showToast(this,"当前输入法是:" + manager.getDefaultInputMethod());
                 break;
             case R.id.set_language:
-//                manager.setLanguage("en","US");
+                manager.setLanguage("zh","CN");
                 break;
             case R.id.get_kernel_log:
                 String path1 = Environment.getExternalStorageDirectory().getPath();
@@ -396,16 +391,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                manager.stopAndroidLogcat();
                 break;
             case R.id.get_cpu_temp:
-//                ToastUtils.showToast(this,"cpu的温度是" + manager.getCPUTemperature());
+                ToastUtils.showToast(this,"cpu的温度是" + manager.getCPUTemperature());
                 break;
             case R.id.set_adb_open:
-//                manager.setADBOpen(true);
+                manager.setADBOpen(true);
                 break;
             case R.id.set_adb_close:
-//                manager.setADBOpen(false);
+                manager.setADBOpen(false);
                 break;
             case R.id.replaceBootanimation:
-//                manager.replaceBootanimation(externalStoragePath + "/bootanimation.zip");
+                manager.replaceBootanimation(externalStoragePath + "/bootanimation.zip");
                 break;
 //            case R.id.openScreenAndVoice:
 //                manager.setScreenAndVoiceOpen(true);
@@ -421,7 +416,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                break;
             case R.id.setDefaultLauncher:
                 //
-//                manager.setDefaultLauncher("com.android.launcher3/com.android.launcher3.Launcher");
+                manager.setDefaultLauncher("com.ys.yslauncher/com.ys.yslauncher.MainActivity");
                 break;
             default:
                 break;
@@ -431,7 +426,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onDestroy() {
-//        manager.unBindAIDLService(this);
+        manager.unBindAIDLService(this);
         unregisterReceiver(mountReceiver);
         super.onDestroy();
     }
